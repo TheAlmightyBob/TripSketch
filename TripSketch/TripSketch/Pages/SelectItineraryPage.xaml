@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSControls="clr-namespace:TripSketch.Controls;assembly=TripSketch"
+             x:Class="TripSketch.Pages.SelectItineraryPage"
+             Title="{Binding Title}">
+  <ContentPage.ToolbarItems>
+    <TSControls:ToolbarItemEx Text="Cancel" ToolbarItemType="Cancel" Command="{Binding CancelCommand}">
+      <TSControls:ToolbarItemEx.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Cancel.png"/>
+      </TSControls:ToolbarItemEx.Icon>
+    </TSControls:ToolbarItemEx>
+  </ContentPage.ToolbarItems>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <Label Text="{Binding Title}"
+           Style="{StaticResource WinPhonePageTitle}"/>
+
+    <ListView x:Name="Calendars"
+              Grid.Row="1"
+              ItemsSource="{Binding Itineraries}"
+              SelectedItem="{Binding SelectedItinerary}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextCell Text="{Binding Name}"/>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+</ContentPage>

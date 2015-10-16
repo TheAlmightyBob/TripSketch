@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSControls="clr-namespace:TripSketch.Controls;assembly=TripSketch"
+             x:Class="TripSketch.Pages.NewItineraryPage"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <TSControls:ToolbarItemEx Text="Done" ToolbarItemType="Done" Command="{Binding DoneCommand}">
+            <TSControls:ToolbarItemEx.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Check.png"/>
+            </TSControls:ToolbarItemEx.Icon>
+        </TSControls:ToolbarItemEx>
+      <TSControls:ToolbarItemEx Text="Cancel" ToolbarItemType="Cancel" Command="{Binding CancelCommand}">
+        <TSControls:ToolbarItemEx.Icon>
+          <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Cancel.png"/>
+        </TSControls:ToolbarItemEx.Icon>
+      </TSControls:ToolbarItemEx>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <Label Text="{Binding Title}" Style="{StaticResource WinPhonePageTitle}" />
+        <TSControls:TableViewEx Intent="Settings" AllowSelection="False">
+            <TSControls:TableViewEx.Root>
+                <TableSection>
+                    <TSControls:EntryCellEx Placeholder="Itinerary Name" Text="{Binding Name}" RequestInitialFocus="True"/>
+
+                </TableSection>
+              <TableSection Title="Import events from:">
+                <ViewCell>
+                  <Picker SelectedIndex="{Binding ImportMode, Mode=TwoWay}">
+                    <Picker.Items>
+                      <!-- Note that these have to match the EventImportMode enumeration 
+                           (Picker doesn't support databinding items) -->
+                      <x:String>None</x:String>
+                      <x:String>Itinerary</x:String>
+                      <x:String>Calendar</x:String>
+                    </Picker.Items>
+                  </Picker>
+                </ViewCell> 
+              </TableSection>
+            </TSControls:TableViewEx.Root>
+        </TSControls:TableViewEx>
+    </StackLayout>
+
+</ContentPage>

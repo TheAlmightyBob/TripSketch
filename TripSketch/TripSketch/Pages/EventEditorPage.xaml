@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSControls="clr-namespace:TripSketch.Controls;assembly=TripSketch"
+             xmlns:Behaviors="clr-namespace:TripSketch.Behaviors;assembly=TripSketch"
+             x:Class="TripSketch.Pages.EventEditorPage"
+             Title="{Binding Title}">
+  <ContentPage.ToolbarItems>
+    <TSControls:ToolbarItemEx Text="Done" ToolbarItemType="Done" Command="{Binding DoneCommand}">
+      <TSControls:ToolbarItemEx.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Check.png"/>
+      </TSControls:ToolbarItemEx.Icon>
+    </TSControls:ToolbarItemEx>
+    <TSControls:ToolbarItemEx Text="Cancel" ToolbarItemType="Cancel" Command="{Binding CancelCommand}">
+      <TSControls:ToolbarItemEx.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Cancel.png"/>
+      </TSControls:ToolbarItemEx.Icon>
+    </TSControls:ToolbarItemEx>
+  </ContentPage.ToolbarItems>
+
+    <ContentPage.Behaviors>
+        <Behaviors:InitialFocusBehavior FocusElement="{x:Reference Name=NameEntry}" IsEnabled="{Binding IsEditing, Converter={StaticResource BooleanInverseConverter}}"/>
+    </ContentPage.Behaviors>
+
+  <Grid Padding="5">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    
+    <Label Grid.ColumnSpan="2"
+           Text="{Binding Title}"
+           Style="{StaticResource WinPhonePageTitle}"/>
+    
+    <Entry Grid.Row="1" Grid.ColumnSpan="2"
+           Placeholder="Name"
+           Text="{Binding Name}" x:Name="NameEntry"/>
+    
+    <Label Grid.Row="2" Text="Start" Style="{StaticResource PropertyLabel}"/>
+    <DatePicker x:Name="Start"
+                Grid.Row="2" Grid.Column="1"
+                Date="{Binding Start}"/>
+    
+    <Label Grid.Row="3" Text="End" Style="{StaticResource PropertyLabel}"/>
+    <DatePicker x:Name="End"
+                Grid.Row="3" Grid.Column="1"
+                Date="{Binding End}"/>
+
+    <Button Grid.Row="4" Grid.ColumnSpan="2"
+            Text="Delete"
+            TextColor="Red"
+            Command="{Binding DeleteCommand}"
+            IsVisible="{Binding IsEditing}"
+            VerticalOptions="End"/>
+  </Grid>
+  
+</ContentPage>

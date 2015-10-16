@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSControls="clr-namespace:TripSketch.Controls;assembly=TripSketch"
+             x:Class="TripSketch.Pages.NewCalendarPage"
+             Title="{Binding Title}">
+  <ContentPage.ToolbarItems>
+    <TSControls:ToolbarItemEx Text="Done" ToolbarItemType="Done" Command="{Binding DoneCommand}">
+      <TSControls:ToolbarItemEx.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Check.png"/>
+      </TSControls:ToolbarItemEx.Icon>
+    </TSControls:ToolbarItemEx>
+    <TSControls:ToolbarItemEx Text="Cancel" ToolbarItemType="Cancel" Command="{Binding CancelCommand}">
+      <TSControls:ToolbarItemEx.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Cancel.png"/>
+      </TSControls:ToolbarItemEx.Icon>
+    </TSControls:ToolbarItemEx>
+  </ContentPage.ToolbarItems>
+
+  <StackLayout>
+    <Label Text="{Binding Title}" Style="{StaticResource WinPhonePageTitle}" />
+    <TableView Intent="Settings">
+      <TableView.Root>
+        <TableSection>
+          <TSControls:EntryCellEx Placeholder="Calendar Name" Text="{Binding CalendarName}" RequestInitialFocus="True"/>
+        </TableSection>
+      </TableView.Root>
+    </TableView>
+  </StackLayout>
+</ContentPage>

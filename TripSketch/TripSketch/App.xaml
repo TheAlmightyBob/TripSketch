@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSConverters="clr-namespace:TripSketch.Converters;assembly=TripSketch"
+             x:Class="TripSketch.App">
+  <Application.Resources>
+    <ResourceDictionary>
+        
+        <!-- STYLES -->
+        
+      <Style x:Key="WinPhonePageTitle" TargetType="Label">
+        <Setter Property="Font" Value="Large"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalOptions" Value="Fill"/>
+        <Setter Property="XAlign" Value="Center"/>
+        <Setter Property="LineBreakMode" Value="NoWrap"/>
+        <Setter Property="IsVisible">
+          <Setter.Value>
+            <OnPlatform x:TypeArguments="x:Boolean"
+                        WinPhone="true"
+                        iOS="false"
+                        Android="false"/>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="PropertyLabel" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="YAlign" Value="Center"/>
+        <Setter Property="LineBreakMode" Value="NoWrap"/>
+
+        <!-- This completely defeats the entire purpose of setting up property pages as
+             grids, but there appears to be a bug on WinPhone where Labels don't
+             properly request their desired size after using the back button in landscape. -->
+        <!-- Update: I don't think that bug is an issue anymore, but this is also useful when
+             *not* laying out property pages on grids..-->
+        <Setter Property="WidthRequest" Value="50"/>
+      </Style>
+      
+        <!-- CONVERTERS -->
+        
+        <TSConverters:BooleanInverseConverter x:Key="BooleanInverseConverter"/>
+        <TSConverters:CalendarDateConverter x:Key="DateConverter"/>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>

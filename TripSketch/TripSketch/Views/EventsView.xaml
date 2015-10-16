@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSControls="clr-namespace:TripSketch.Controls;assembly=TripSketch"
+             xmlns:TSBehaviors="clr-namespace:TripSketch.Behaviors"
+			 x:Class="TripSketch.Views.EventsView">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <Label Text="{Binding Title}"
+           Style="{StaticResource WinPhonePageTitle}"/>
+
+    <ListView x:Name="Events"
+              Grid.Row="1"
+              ItemsSource="{Binding EventsByDay}"
+              SelectedItem="{Binding SelectedEvent}"
+              TSBehaviors:ListViewTap.Command="{Binding EditEventCommand}"
+              IsGroupingEnabled="True"
+              GroupDisplayBinding="{Binding Date, StringFormat='{0:ddd, MMM d}'}">
+      
+      <!-- Possibly use a custom group header for WinPhone instead of the giant blue default...
+           (iOS default is fine) -->
+      <!--<ListView.GroupHeaderTemplate>
+        <OnPlatform x:TypeArguments="DataTemplate" iOS="{x:Null}" Android="{x:Null}">
+          <OnPlatform.WinPhone>
+            <DataTemplate>
+              <ViewCell>
+                <ViewCell.View>
+                  <Label Text="{Binding Date, StringFormat='{0:ddd, MMM d}'}" FontSize="Medium"/>
+                </ViewCell.View>
+              </ViewCell>
+            </DataTemplate>
+          </OnPlatform.WinPhone>
+        </OnPlatform>
+      </ListView.GroupHeaderTemplate>-->
+      
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextCell Text="{Binding Name}">
+            <TextCell.ContextActions>
+                <MenuItem Text="Delete"
+                          IsDestructive="True"
+                          Command="{Binding Source={x:Reference Events}, Path=BindingContext.DeleteEventCommand}"
+                          CommandParameter="{Binding .}"/>
+            </TextCell.ContextActions>
+          </TextCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+</ContentView>

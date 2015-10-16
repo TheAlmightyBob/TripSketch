@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSControls="clr-namespace:TripSketch.Controls;assembly=TripSketch"
+             xmlns:TSBehaviors="clr-namespace:TripSketch.Behaviors"
+             x:Class="TripSketch.Pages.ItinerariesPage"
+             Title="{Binding Title}">
+  <ContentPage.ToolbarItems>
+    <TSControls:ToolbarItemEx Text="Add" ToolbarItemType="Add" Command="{Binding AddCommand}">
+      <TSControls:ToolbarItemEx.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Add.png"/>
+      </TSControls:ToolbarItemEx.Icon>
+    </TSControls:ToolbarItemEx>
+  </ContentPage.ToolbarItems>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <Label Text="{Binding Title}"
+       Style="{StaticResource WinPhonePageTitle}"/>
+
+    <ListView x:Name="Itineraries"
+              Grid.Row="1"
+              ItemsSource="{Binding Itineraries}"
+              TSBehaviors:ListViewTap.Command="{Binding OpenCommand}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <TextCell Text="{Binding Name}" Detail="{Binding DateRangeDisplay}">
+            <TextCell.ContextActions>
+              <MenuItem Text="Delete"
+                        IsDestructive="True"
+                        Command="{Binding Source={x:Reference Itineraries}, Path=BindingContext.DeleteCommand}"
+                        CommandParameter="{Binding .}"/>
+            </TextCell.ContextActions>
+          </TextCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+
+</ContentPage>

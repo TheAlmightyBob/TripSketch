@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:TSControls="clr-namespace:TripSketch.Controls;assembly=TripSketch"
+             x:Class="TripSketch.Pages.NewTripPage"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <TSControls:ToolbarItemEx Text="Done" ToolbarItemType="Done" Command="{Binding DoneCommand}">
+            <TSControls:ToolbarItemEx.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Check.png"/>
+            </TSControls:ToolbarItemEx.Icon>
+        </TSControls:ToolbarItemEx>
+      <TSControls:ToolbarItemEx Text="Cancel" ToolbarItemType="Cancel" Command="{Binding CancelCommand}">
+        <TSControls:ToolbarItemEx.Icon>
+          <OnPlatform x:TypeArguments="FileImageSource" WinPhone="Toolkit.Content/ApplicationBar.Cancel.png"/>
+        </TSControls:ToolbarItemEx.Icon>
+      </TSControls:ToolbarItemEx>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <Label Text="{Binding Title}" Style="{StaticResource WinPhonePageTitle}" />
+        <TSControls:TableViewEx Intent="Settings" AllowSelection="False">
+            <TSControls:TableViewEx.Root>
+                <TableSection>
+                    <TSControls:EntryCellEx Placeholder="Trip Name" Text="{Binding Name}" RequestInitialFocus="True"/>
+                    <ViewCell>
+                        <!-- TODO: Turn this into custom DateCell -->
+                        <Grid Padding="15, 0, 5, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="1" Text="Start" Style="{StaticResource PropertyLabel}"/>
+                            <DatePicker x:Name="Start"
+                                        Grid.Row="1" Grid.Column="1"
+                                        Date="{Binding Start}"/>
+                        </Grid>
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid Padding="15, 0, 5, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="1" Text="End" Style="{StaticResource PropertyLabel}"/>
+                            <DatePicker x:Name="End"
+                                        Grid.Row="1" Grid.Column="1"
+                                        Date="{Binding End}"/>
+                        </Grid>
+                    </ViewCell>
+                </TableSection>
+            </TSControls:TableViewEx.Root>
+        </TSControls:TableViewEx>
+    </StackLayout>
+
+</ContentPage>
