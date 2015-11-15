@@ -1,6 +1,8 @@
 # TripSketch
 Xamarin.Forms app for iOS/WinPhone to help with rapid brainstorming of travel itineraries.
 
+![iOS](Screenshots/iOS.png)
+
 **Yet another calendar app?**
 
 Not exactly. Most calendar apps are focused on entering precise appointments for individual calendars, setting recurrence/alerts, etc. Most trip planning apps focus on sights/hotels/etc.
