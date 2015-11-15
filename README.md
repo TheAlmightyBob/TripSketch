@@ -17,5 +17,9 @@ I've traveled rather a bit, and usually start with planning multiple concurrent 
 
 Yeah, I'm not a designer. My goal was to make it easy and efficient to use, not pretty. Design contributions are welcome.
 
+**Wait, why does the week start with Wednesday in the screenshot?**
+
+In order to keep focus on the trip being planned, the displayed calendar range is specified by the user.
+
 ###Tech stuff
 Built with Xamarin.Forms and my Calendars API plugin (see other GitHub repo). Wrote my own MVVM supporting stuff because I felt like it. Yes I could have saved time with MVVM Cross, MVVM Light, or Xamarin.Forms.Labs... all great libraries.
